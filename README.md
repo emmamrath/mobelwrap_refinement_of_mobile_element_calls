@@ -52,24 +52,18 @@ Terminology: Mobster and Mobelwrap report the border5 and border3 genomic positi
   
 ## Input parameters to the Mobelwrap program
 
-* -i <in_Mobster> (required) Input file containing Mobster predictions  
-* -b <in_bam_reads> (required) Input BAM file containing mapped reads. Needs to be indexed. BAM reads in the region of each Mobster mobile-element-insertion-prediction will be retrieved from this BAM file to determine the exact insertions points of the Mobster mobile-element-insertion-prediction  
-	parser.add_argument('-l', action="store", dest="read_length_of_in_bam_reads", required=True, help='The general read length of the reads in the input BAM file')
-	parser.add_argument('-r', action="store", dest="in_reference_genome", required=True, help='Reference genome. A fasta file indexed by samtools faidx. BAM reads will be compared to this reference to determine the exact insertion points for Mo
-bster mobile-element-insertion-predictions')
-	parser.add_argument('-e', action="store", dest="existing_mobile_element_regions", required=True, help='Mobster\'s repmask file \'hg19_alul1svaerv.txt\' consisting of 1 line header and 1 line per mobile element region already existing in the
- reference genome.')
-	parser.add_argument('-o', action="store", dest="out_Mobster_file", required=True, help='Output file will contain refined Mobster mobile-element-insertion-predictions, and where possible, extra information appended to the record to precisely
- identify the insertion points. (And if this refinement program does not find extra information for Mobster MEIs in existing ME region, then the MEI is dropped.)')
-	parser.add_argument('-s', action="store", dest="restart_Mobster_file", required=False, help='If this file is present, then keep the MEI calls from this file and continue processing input Mobster calls from the next input Mobster MEI after t
-he last MEI call seen in this file.')
-	parser.add_argument('-q', action="store", dest="quality_filter", required=False, help='If present, then filter MEI calls, keeping calls having this or higher quality score.')
-	parser.add_argument('-d', action="store", dest="discard_Mobster_file", required=False, help='If this output file is present, then record all discarded Mobster MEI calls to this file.')
-	parser.add_argument('-c', action="store", dest="num_cores", required=False, help='Number of concurrent processors for multiprocessor processing')
-	parser.add_argument('-k', action="store", dest="keep_chr_prefix", required=False, help='Mobster puts chr in front of chromosome and this program removes it. If this flag is present then this program will not remove the chr prefix.')
-	parser.add_argument('-p', action="store", dest="python_path_2", required=False, help='The path where the python program called by this program is found. Alternatively, set PYTHONPATH2 environmental variable to this value.')
-	args = parser.parse_args()
-
+* -i <in_Mobster> (required) Input file containing Mobster predictions.  
+* -b <in_bam_reads> (required) Input BAM file containing mapped reads. Needs to be indexed. BAM reads in the region of each Mobster mobile-element-insertion-prediction will be retrieved from this BAM file to determine the exact insertions points of the Mobster mobile-element-insertion-prediction.  
+* -l <read_length_of_in_bam_reads> (required) The general read length of the reads in the input BAM file.  
+* -r <in_reference_genome> (required) Reference genome. A fasta file indexed by samtools faidx. BAM reads will be compared to this reference to determine the exact insertion points for Mobster mobile-element-insertion-predictions.  
+* -e <existing_mobile_element_regions> (required) Mobster's repmask file 'hg19_alul1svaerv.txt' consisting of 1 line header and 1 line per mobile element region already existing in the reference genome.  
+* -o <out_Mobster_file> (required) Output file will contain refined Mobster mobile-element-insertion-predictions, and where possible, extra information appended to the record to precisely identify the insertion points. (And if this refinement program does not find extra information for Mobster MEIs in existing ME region, then the MEI is dropped.  
+* -s <restart_Mobster_file> (optional) If this file is present, then keep the MEI calls from this file and continue processing input Mobster calls from the next input Mobster MEI after the last MEI call seen in this file.  
+* -q <quality_filter> (optional) If present, then filter MEI calls, keeping calls having this or higher quality score.  
+* -d <discard_Mobster_file> (optional) If this output file is present, then record all discarded Mobster MEI calls to this file.  
+* -c <num_cores> (optional) Number of concurrent processors for multiprocessor processing.  
+* -k <keep_chr_prefix> (optional) Mobster puts chr in front of chromosome and this program removes it. If this flag is present then this program will not remove the chr prefix.  
+* -p <python_path_2> (optional) The path where the python program called by this program is found. Alternatively, set PYTHONPATH2 environmental variable to this value.  
 
 ## How to prepare a Mobster+Mobelwrap pipeline
   
