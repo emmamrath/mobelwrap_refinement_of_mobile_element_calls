@@ -1,14 +1,27 @@
 
-module load samtools/1.4
-module load python/2.7.6
+module load samtools
+
+module load python3
+or
+module load python2-as-python
 
 ##### Run the python2 program with your bam file, reference genome, and the coordinates you wish to view in the bam file.
 
-# GRCh37 example
-python reformat_sam_file_aligned_against_ref_first_get_extracts.py 18:48573667 /g/data/bam_samples/hs37d5x/GATK3_fastq2gvcf-hs37d5x-1.0/bams/SAMPLE1_LP3645486-NTP_D07_ST-E00185_H5G7MALXX.8.dupmarked.realigned.recalibrated.bam /g/data/resources/reference_genomes/hs37d5x/hs37d5x.fa
+# GRCh37 example for python 3
 
-# GRCh38 example
-python reformat_sam_file_aligned_against_ref_first_get_extracts.py chr7:91741915-91802736 /g/data/bam_samples/SAMPL2.bam /g/data1a/ku3/emr913/reference_genomes/hg19_for_AOCS/hg19_for_AOCS.fa /g/data/resources/reference_genomes/GRCh38/GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna
+python3 reformat_sam_file_aligned_against_ref_first_get_extracts_python3.py 18:48573667 /g/data/bam_samples/hs37d5x/GATK3_fastq2gvcf-hs37d5x-1.0/bams/SAMPLE1.bam /g/data/resources/reference_genomes/hs37d5x/hs37d5x.fa
+
+# GRCh37 example for python 2
+
+python reformat_sam_file_aligned_against_ref_first_get_extracts.py 18:48573667 /g/data/bam_samples/hs37d5x/GATK3_fastq2gvcf-hs37d5x-1.0/bams/SAMPLE1.bam /g/data/resources/reference_genomes/hs37d5x/hs37d5x.fa
+
+# GRCh38 example for python 3
+
+python3 reformat_sam_file_aligned_against_ref_first_get_extracts_python3.py chr7:91741915-91802736 /g/data/bam_samples/SAMPLE2.bam /g/data/resources/reference_genomes/GRCh38/GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna
+
+# GRCh38 example for python 2
+
+python reformat_sam_file_aligned_against_ref_first_get_extracts.py chr7:91741915-91802736 /g/data/bam_samples/SAMPLE2.bam /g/data/resources/reference_genomes/GRCh38/GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna
 
 ##### Visualise the output text file of the bam reads aligned to the reference genome in the vicinity of the coordinates.
 
@@ -27,6 +40,4 @@ cat temp_bam_extract_chr5_74685464_74685664.sam.aligned.txt | GREP_COLORS='mt=32
 GREP_COLORS='mt=36' grep --color=always 'C\|$' | \
 GREP_COLORS='mt=33' grep --color=always 'G\|$' | \
 GREP_COLORS='mt=31' grep --color=always 'T\|$' | less -R -S
-
-
 
