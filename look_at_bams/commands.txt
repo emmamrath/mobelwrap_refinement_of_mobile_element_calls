@@ -2,13 +2,31 @@
 module load samtools/1.4
 module load python/2.7.6
 
-ls -l /g/data3/abc/results/phase2/hs37d5x/GATK3_fastq2gvcf-hs37d5x-1.0/bams/ # MGRB 1-lane
+##### Run the python2 program with your bam file, reference genome, and the coordinates you wish to view in the bam file.
 
-python reformat_sam_file_aligned_against_ref_first_get_extracts.py 18:48573667 /g/data3/abc/results/phase2/hs37d5x/GATK3_fastq2gvcf-hs37d5x-1.0/bams/BAASU_LP3645486-NTP_D07_ST-E00185_H5G7MALXX.8.dupmarked.realigned.recalibrated.bam /g/data3/abc/resources/reference_genomes/hs37d5x/hs37d5x.fa
+# GRCh37 example
+python reformat_sam_file_aligned_against_ref_first_get_extracts.py 18:48573667 /g/data/bam_samples/hs37d5x/GATK3_fastq2gvcf-hs37d5x-1.0/bams/SAMPLE1_LP3645486-NTP_D07_ST-E00185_H5G7MALXX.8.dupmarked.realigned.recalibrated.bam /g/data/resources/reference_genomes/hs37d5x/hs37d5x.fa
 
-python reformat_sam_file_aligned_against_ref_first_get_extracts.py chr18:48573667 /g/data3/abc/users/emr913/James_Torpy_mobile_elements_2018jul/RNA_seq/arPT1.bam /g/data1a/ku3/emr913/reference_genomes/hg19_for_AOCS/hg19_for_AOCS.fa
+# GRCh38 example
+python reformat_sam_file_aligned_against_ref_first_get_extracts.py chr7:91741915-91802736 /g/data/bam_samples/SAMPL2.bam /g/data1a/ku3/emr913/reference_genomes/hg19_for_AOCS/hg19_for_AOCS.fa /g/data/resources/reference_genomes/GRCh38/GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna
 
-python reformat_sam_file_aligned_against_ref_first_get_extracts.py chr7:91741915-91802736 /g/data3/abc/users/emr913/James_Torpy_mobile_elements_2018jul/bams/AOCS-034-1-0.bam /g/data1a/ku3/emr913/reference_genomes/hg19_for_AOCS/hg19_for_AOCS.fa
+##### Visualise the output text file of the bam reads aligned to the reference genome in the vicinity of the coordinates.
 
-python reformat_sam_file_aligned_against_ref_first_get_extracts.py chr10:97206791 /g/data3/abc/users/emr913/NA12878_PacBio/NA12878_PacBio_MtSinai.bam /g/data3/abc/users/emr913/gatk_bundle/human_g1k_v37/human_g1k_v37_decoy.fasta
+less -S temp_bam_extract_chr5_74685464_74685664.sam.aligned.txt
+
+##### View the output in colour.
+
+# Adenine: Green. Cytosine: Blue. Guanine: Yellow. Thymine: Red
+cat temp_bam_extract_chr5_74685464_74685664.sam.aligned.txt | GREP_COLORS='mt=32' grep --color=always 'A\|$' | \
+GREP_COLORS='mt=34' grep --color=always 'C\|$' | \
+GREP_COLORS='mt=33' grep --color=always 'G\|$' | \
+GREP_COLORS='mt=31' grep --color=always 'T\|$' | less -R -S
+
+# Adenine: Green. Cytosine: Cyan. Guanine: Yellow. Thymine: Red
+cat temp_bam_extract_chr5_74685464_74685664.sam.aligned.txt | GREP_COLORS='mt=32' grep --color=always 'A\|$' | \
+GREP_COLORS='mt=36' grep --color=always 'C\|$' | \
+GREP_COLORS='mt=33' grep --color=always 'G\|$' | \
+GREP_COLORS='mt=31' grep --color=always 'T\|$' | less -R -S
+
+
 
